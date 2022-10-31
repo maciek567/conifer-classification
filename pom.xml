@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.agh.expertsystems</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <artifactId>drools</artifactId>
-    <name>drools</name>
+    <artifactId>classifier</artifactId>
+    <name>classifier</name>
 
     <properties>
         <http-component-version>4.4.6</http-component-version>

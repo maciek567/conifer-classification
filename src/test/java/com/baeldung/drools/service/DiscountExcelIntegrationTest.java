@@ -8,7 +8,7 @@ import org.kie.api.io.Resource;
 import org.kie.api.runtime.KieSession;
 import org.kie.internal.io.ResourceFactory;
 
-import com.baeldung.drools.config.DroolsBeanFactory;
+import config.DroolsBeanFactory;
 import com.baeldung.drools.model.Customer;
 import com.baeldung.drools.model.Customer.CustomerType;
 

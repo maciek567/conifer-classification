@@ -2,7 +2,7 @@ package com.baeldung.drools.backward_chaining;
 
 import org.kie.api.runtime.KieSession;
 
-import com.baeldung.drools.config.DroolsBeanFactory;
+import config.DroolsBeanFactory;
 import com.baeldung.drools.model.Fact;
 import com.baeldung.drools.model.Result;
 

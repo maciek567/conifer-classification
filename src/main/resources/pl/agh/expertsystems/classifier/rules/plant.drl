@@ -1,0 +1,22 @@
+package pl.agh.expertsystems.classifier.rules
+
+import pl.agh.expertsystems.classifier.model.*
+
+global pl.agh.expertsystems.classifier.model.Plant resultPlant;
+
+dialect  "mvel"
+
+rule "Suggest temp"
+    when
+        Cone(orientation == "UP")
+    then
+        Temp temp = new Temp(25);
+        insert(temp)
+end
+
+rule "Suggest name basing on temp"
+    when
+        Temp(t > 20)
+    then
+        resultPlant.setName("JODLA");
+end

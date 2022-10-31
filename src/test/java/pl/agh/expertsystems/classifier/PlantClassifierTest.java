@@ -20,7 +20,7 @@ public class PlantClassifierTest {
     @Test
     public void whenCriteriaMatching_ThenSuggestJODLA() {
         Plant result = plantClassifier.classify(
-                Cone.UP(),
+                Cone.up(),
                 new Temp(1),
                 new Temp(5)
         );

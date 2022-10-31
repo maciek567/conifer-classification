@@ -9,7 +9,7 @@ import lombok.Value;
 public class Cone implements Fact {
     String orientation;
 
-    public static Cone UP() {
-        return new Cone("UP");
+    public static Cone up() {
+        return new Cone("up");
     }
 }

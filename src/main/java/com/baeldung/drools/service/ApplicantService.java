@@ -3,6 +3,9 @@ package com.baeldung.drools.service;
 import com.baeldung.drools.config.DroolsBeanFactory;
 import com.baeldung.drools.model.Applicant;
 import com.baeldung.drools.model.SuggestedRole;
+import com.baeldung.drools.model.Temp;
+import org.apache.poi.ss.formula.functions.T;
+import org.drools.core.event.DebugRuleRuntimeEventListener;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
@@ -12,12 +15,12 @@ public class ApplicantService {
 
     KieSession kieSession=new DroolsBeanFactory().getKieSession();
 
-    public SuggestedRole suggestARoleForApplicant(Applicant applicant,SuggestedRole suggestedRole) throws IOException {
+    public SuggestedRole suggestARoleForApplicant(Applicant applicant, SuggestedRole suggestedRole) throws IOException {
         kieSession.insert(applicant);
-        kieSession.setGlobal("suggestedRole",suggestedRole);
+        kieSession.setGlobal("suggestedRole", suggestedRole);
         kieSession.fireAllRules();
         System.out.println(suggestedRole.getRole());
-        return  suggestedRole;
+        return suggestedRole;
 
     }
 }

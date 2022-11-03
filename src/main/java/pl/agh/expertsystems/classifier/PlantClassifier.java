@@ -1,5 +1,6 @@
 package pl.agh.expertsystems.classifier;
 
+import pl.agh.expertsystems.classifier.model.Cone;
 import pl.agh.expertsystems.classifier.model.Fact;
 import pl.agh.expertsystems.classifier.model.Plant;
 
@@ -15,7 +16,7 @@ public class PlantClassifier extends AnyClassifier<Plant>  {
         System.out.println(kieSession.getFactCount());
         kieSession.fireAllRules();
         System.out.println(kieSession.getFactCount());
-        System.out.println(resultPlant.getName());
+        System.out.println(resultPlant.getPlantName());
 
         return resultPlant;
     }

@@ -5,5 +5,5 @@ import lombok.Value;
 
 @Value
 @AllArgsConstructor(staticName = "create")
-public class BerryPlant {
+public class BerryPlant implements Fact {
 }

@@ -1,5 +1,6 @@
 package pl.agh.expertsystems.classifier;
 
+import junit.framework.AssertionFailedError;
 import org.junit.Before;
 import org.junit.Test;
 import pl.agh.expertsystems.classifier.model.*;
@@ -16,22 +17,58 @@ public class PlantClassifierTest {
     }
 
     @Test
-    public void whenCriteriaMatching_ThenSuggestFIR() {
+    public void whenCriteriaMatching_ThenSuggestPine() {
         Plant result = plantClassifier.classify(
-                new Cone(Cone.Orientation.UPWARDS, Cone.DecayPlace.TREE, Cone.Shape.ELONGATED),
-                new Temp(1),
-                new Temp(5)
-                //new Needle("SOFT")
+                ConePlant.create(),
+                new Cone(Cone.Orientation.UPWARDS, Cone.DecayPlace.GROUND, Cone.Shape.ROUND),
+                new Needle(Needle.CountInOneBase.ALWAYS_TWO)
+        );
+        assertEquals(PlantName.PINE, result.getPlantName());
+    }
+
+    @Test
+    public void whenCriteriaMatching_ThenSuggestFir() {
+        Plant result = plantClassifier.classify(
+                ConePlant.create(),
+                new Cone(Cone.Orientation.UPWARDS, Cone.DecayPlace.TREE, Cone.Shape.ELONGATED)
         );
         assertEquals(PlantName.FIR, result.getPlantName());
     }
 
     @Test
-    public void whenCriteriaMatching_ThenSuggestYEW() {
+    public void whenCriteriaMatching_ThenSuggestSpruce() {
         Plant result = plantClassifier.classify(
-                Fruit.create(Fruit.Type.BERRY),
+                ConePlant.create(),
+                new Cone(Cone.Orientation.DOWNWARDS, Cone.DecayPlace.GROUND, Cone.Shape.ELONGATED)
+        );
+        assertEquals(PlantName.SPRUCE, result.getPlantName());
+    }
+
+    @Test(expected = AssertionFailedError.class)
+    public void whenCriteriaMatchPine_ThenNotSuggestSpruce() {
+        Plant result = plantClassifier.classify(
+                ConePlant.create(),
+                new Cone(Cone.Orientation.UPWARDS, Cone.DecayPlace.GROUND, Cone.Shape.ROUND),
+                new Needle(Needle.CountInOneBase.ALWAYS_TWO)
+        );
+        assertEquals(PlantName.SPRUCE, result.getPlantName());
+    }
+
+    @Test(expected = AssertionFailedError.class)
+    public void whenCriteriaMatchYew_ThenNotSuggestFir() {
+        Plant result = plantClassifier.classify(
+                BerryPlant.create(),
                 new Berry(Berry.Color.RED)
         );
-        assertEquals(PlantName.YEW, result.getPlantName());
+        assertEquals(PlantName.FIR, result.getPlantName());
+    }
+
+    @Test(expected = AssertionFailedError.class)
+    public void whenCriteriaMatchFir_ThenNotSuggestPine() {
+        Plant result = plantClassifier.classify(
+                ConePlant.create(),
+                new Cone(Cone.Orientation.UPWARDS, Cone.DecayPlace.TREE, Cone.Shape.ELONGATED)
+        );
+        assertEquals(PlantName.PINE, result.getPlantName());
     }
 }

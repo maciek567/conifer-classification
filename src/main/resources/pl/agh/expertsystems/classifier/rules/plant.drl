@@ -6,17 +6,96 @@ global pl.agh.expertsystems.classifier.model.Plant resultPlant;
 
 dialect  "mvel"
 
-rule "Suggest temp"
+//rule "Suggest FIR"
+//    when
+//
+//        FirLike() and Needle(type == "SOFT")
+//    then
+//
+//        resultPlant.setPlantName(PlantName.FIR);
+//end
+//
+//rule "Suggest Firlike"
+//    when
+//        Cone(decayPlace == Cone.DecayPlace.TREE && orientation == Cone.Orientation.UPWARDS)
+//    then
+//        insert(FirLike.create())
+//end
+
+rule "Suggest BerryPlant"
     when
-        Cone(orientation == "up")
+        Fruit(type == Fruit.Type.BERRY)
     then
-        Temp temp = new Temp(25);
-        insert(temp)
+        insert(BerryPlant.create())
 end
 
-rule "Suggest name basing on temp"
+rule "Suggest YEW"
     when
-        Temp(t > 20)
+        BerryPlant() and Berry(color == Berry.Color.RED)
     then
-        resultPlant.setName("JODLA");
+        resultPlant.setPlantName(PlantName.YEW);
+end
+
+rule "Suggest JUNIPER"
+    when
+        BerryPlant() and Berry(color == Berry.Color.BLUE)
+    then
+        resultPlant.setPlantName(PlantName.JUNIPER);
+end
+
+rule "Suggest ConePlant"
+    when
+        Fruit(type == Fruit.Type.CONE)
+    then
+        insert(ConePlant.create())
+end
+
+rule "Suggest Fir or Spruce"
+    when
+        ConePlant() and Cone(shape == Cone.Shape.ELONGATED)
+    then
+        insert(FirHint.create())
+        insert(SpruceHint.create())
+end
+
+rule "Suggest Pine or Larch"
+    when
+        ConePlant() and Cone(shape == Cone.Shape.ROUND)
+    then
+        insert(PineHint.create())
+        insert(LarchHint.create())
+end
+
+rule "Suggest Fir"
+    when
+        FirHint() and
+        Cone(orientation == Cone.Orientation.UPWARDS) and
+        Cone(decayPlace == Cone.DecayPlace.TREE)
+    then
+        resultPlant.setPlantName(PlantName.FIR);
+end
+
+rule "Suggest Spruce"
+    when
+        SpruceHint() and
+        Cone(orientation == Cone.Orientation.DOWNWARDS) and
+        Cone(decayPlace == Cone.DecayPlace.GROUND)
+    then
+        resultPlant.setPlantName(PlantName.SPRUCE);
+end
+
+rule "Suggest Pine"
+    when
+        PineHint() and
+        Needle(countInOneBase == Needle.CountInOneBase.ALWAYS_TWO)
+    then
+        resultPlant.setPlantName(PlantName.PINE);
+end
+
+rule "Suggest Larch"
+    when
+        LarchHint() and
+        Needle(countInOneBase == Needle.CountInOneBase.MORE_THAN_TWENTY)
+    then
+        resultPlant.setPlantName(PlantName.LARCH);
 end

@@ -8,5 +8,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor(staticName = "empty")
 public class Plant {
-    private String name;
+
+    private PlantName plantName;
 }

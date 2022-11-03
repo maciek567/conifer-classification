@@ -5,11 +5,26 @@ import lombok.AllArgsConstructor;
 import lombok.Value;
 
 @Value
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class Cone implements Fact {
-    String orientation;
-
-    public static Cone up() {
-        return new Cone("up");
+    public enum Orientation {
+        UPWARDS,
+        DOWNWARDS
     }
+
+    public enum DecayPlace {
+        TREE,
+        GROUND
+    }
+
+    public enum Shape {
+        ELONGATED,
+        ROUND
+    }
+
+    Orientation orientation;
+
+    DecayPlace decayPlace;
+
+    Shape shape;
 }

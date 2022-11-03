@@ -1,8 +1,7 @@
 package com.baeldung.drools.service;
 
-import com.baeldung.drools.config.DroolsBeanFactory;
+import config.DroolsBeanFactory;
 import com.baeldung.drools.model.Product;
-import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 public class ProductService {

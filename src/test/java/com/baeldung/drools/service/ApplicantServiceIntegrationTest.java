@@ -26,7 +26,7 @@ public class ApplicantServiceIntegrationTest {
         Applicant applicant = new Applicant("Davis", 37, 1600000.0, 11);
         SuggestedRole suggestedRole = new SuggestedRole();
         applicantService.suggestARoleForApplicant(applicant, suggestedRole);
-        assertEquals("Manager", suggestedRole.getRole());
+        assertEquals("Manager123", suggestedRole.getRole());
     }
 
     @Test

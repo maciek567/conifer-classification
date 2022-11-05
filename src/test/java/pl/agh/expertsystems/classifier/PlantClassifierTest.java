@@ -71,4 +71,34 @@ public class PlantClassifierTest {
         );
         assertEquals(PlantName.PINE, result.getPlantName());
     }
+
+    @Test
+    public void whenCriteriaMatching_ThenSuggestLarch() {
+        Plant result = plantClassifier.classify(
+                new Needle(Needle.CountInOneBase.MORE_THAN_TWENTY),
+                Cone.havingDecayPlace(Cone.DecayPlace.GROUND).withShape(Cone.Shape.ROUND),
+                Fruit.create(Fruit.Type.CONE)
+        );
+        assertEquals(PlantName.LARCH, result.getPlantName());
+    }
+
+    @Test
+    public void whenCriteriaMatching_ThenSuggestYew() {
+        Plant result = plantClassifier.classify(
+                new Needle(Needle.CountInOneBase.MORE_THAN_TWENTY),
+                Fruit.create(Fruit.Type.BERRY),
+                new Berry(Berry.Color.RED)
+        );
+        assertEquals(PlantName.YEW, result.getPlantName());
+    }
+
+    @Test
+    public void whenCriteriaMatching_ThenSuggestJuniper() {
+        Plant result = plantClassifier.classify(
+                new Needle(Needle.CountInOneBase.MORE_THAN_TWENTY),
+                Fruit.create(Fruit.Type.BERRY),
+                new Berry(Berry.Color.BLUE)
+        );
+        assertEquals(PlantName.JUNIPER, result.getPlantName());
+    }
 }

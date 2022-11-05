@@ -27,4 +27,12 @@ public class Cone implements Fact {
     DecayPlace decayPlace;
 
     Shape shape;
+
+    public static Cone oriented(Orientation orientation) { return new Cone(orientation, null, null); }
+
+    public static Cone havingDecayPlace(DecayPlace decayPlace) { return new Cone(null, decayPlace, null); }
+
+    public static Cone havingShape(Shape shape) { return new Cone(null, null, shape); }
+
+    public Cone withShape(Shape shape) { return new Cone(getOrientation(), getDecayPlace(), shape); }
 }

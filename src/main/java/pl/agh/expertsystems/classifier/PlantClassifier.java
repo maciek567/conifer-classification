@@ -1,12 +1,11 @@
 package pl.agh.expertsystems.classifier;
 
-import pl.agh.expertsystems.classifier.model.Cone;
 import pl.agh.expertsystems.classifier.model.Fact;
 import pl.agh.expertsystems.classifier.model.Plant;
 
 import java.util.Arrays;
 
-public class PlantClassifier extends AnyClassifier<Plant>  {
+public class PlantClassifier extends AnyClassifier<Plant> {
 
     @Override
     public Plant classify(Fact... facts) {

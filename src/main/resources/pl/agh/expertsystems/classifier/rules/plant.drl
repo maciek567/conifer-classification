@@ -6,22 +6,6 @@ global pl.agh.expertsystems.classifier.model.Plant resultPlant;
 
 dialect  "mvel"
 
-//rule "Suggest FIR"
-//    when
-//
-//        FirLike() and Needle(type == "SOFT")
-//    then
-//
-//        resultPlant.setPlantName(PlantName.FIR);
-//end
-//
-//rule "Suggest Firlike"
-//    when
-//        Cone(decayPlace == Cone.DecayPlace.TREE && orientation == Cone.Orientation.UPWARDS)
-//    then
-//        insert(FirLike.create())
-//end
-
 rule "Suggest BerryPlant"
     when
         Fruit(type == Fruit.Type.BERRY)
@@ -60,10 +44,27 @@ end
 
 rule "Suggest Pine or Larch"
     when
-        ConePlant() and Cone(shape == Cone.Shape.ROUND)
+        ConePlant() and
+        Cone(shape == Cone.Shape.OVAL)
     then
         insert(PineHint.create())
         insert(LarchHint.create())
+end
+
+rule "Suggest Scots pine or black pine or pinus mugo"
+    when
+        PineHint() and
+        Needle(countInOneBase == Needle.CountInOneBase.ALWAYS_TWO)
+    then
+        insert(TwoNeedlePine.create())
+end
+
+rule "Suggest Pinus cembra or pinus strobus"
+    when
+        ConePlant() and
+        Needle(countInOneBase == Needle.CountInOneBase.ALWAYS_FIVE)
+    then
+        insert(FiveNeedlePine.create())
 end
 
 rule "Suggest Fir"
@@ -84,12 +85,52 @@ rule "Suggest Spruce"
         resultPlant.setPlantName(PlantName.SPRUCE);
 end
 
-rule "Suggest Pine"
+rule "Suggest Pseudotsuga"
     when
-        PineHint() and
-        Needle(countInOneBase == Needle.CountInOneBase.ALWAYS_TWO)
+        ConePlant() and
+        Needle(lemonScent == true)
     then
-        resultPlant.setPlantName(PlantName.PINE);
+        resultPlant.setPlantName(PlantName.PSEUDOTSUGA);
+end
+
+rule "Suggest Scots pine"
+    when
+        TwoNeedlePine() and
+        Cone(size == Size.SMALL)
+    then
+        resultPlant.setPlantName(PlantName.SCOTS_PINE);
+end
+
+rule "Suggest black pine"
+    when
+        TwoNeedlePine() and
+        Cone(size == Size.BIG)
+    then
+        resultPlant.setPlantName(PlantName.BLACK_PINE);
+end
+
+rule "Suggest Pinus mugo"
+    when
+        TwoNeedlePine() and
+        PlantShape(shape == Shape.BUSH)
+    then
+        resultPlant.setPlantName(PlantName.PINUS_MUGO);
+end
+
+rule "Suggest Pinus cembra"
+    when
+        FiveNeedlePine() and
+        Cone(seed == Cone.Seed.NUT_SHAPED)
+    then
+        resultPlant.setPlantName(PlantName.PINUS_CEMBRA);
+end
+
+rule "Suggest Pinus strobus"
+    when
+        FiveNeedlePine() and
+        Cone(seed == Cone.Seed.WING_SHAPED)
+    then
+        resultPlant.setPlantName(PlantName.PINUS_STROBUS);
 end
 
 rule "Suggest Larch"

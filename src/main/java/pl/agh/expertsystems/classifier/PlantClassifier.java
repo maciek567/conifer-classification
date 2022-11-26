@@ -1,9 +1,7 @@
 package pl.agh.expertsystems.classifier;
 
 import lombok.extern.slf4j.Slf4j;
-import pl.agh.expertsystems.classifier.model.Berry;
-import pl.agh.expertsystems.classifier.model.Fact;
-import pl.agh.expertsystems.classifier.model.Plant;
+import pl.agh.expertsystems.classifier.model.*;
 import sun.rmi.runtime.Log;
 
 import java.util.*;
@@ -57,6 +55,10 @@ public class PlantClassifier extends AnyClassifier<Plant> {
     private static Map<String, String> initializeHints() {
         Map<String, String> hints = new HashMap<>();
         hints.put("BerryPlant()", hint(Berry.Color.class, Berry.Color.values()));
+        hints.put("ConePlant()", hint(Cone.Shape.class, Cone.Shape.values()));
+        hints.put("FirHint()", hint(Cone.Orientation.class, Cone.Orientation.values()));
+        hints.put("SpruceHint()", hint(Cone.DecayPlace.class, Cone.DecayPlace.values()));
+        hints.put("LarchHint()", hint(Needle.CountInOneBase.class, Needle.CountInOneBase.values()));
         return hints;
     }
 

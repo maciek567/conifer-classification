@@ -70,8 +70,8 @@ end
 rule "Suggest Fir"
     when
         FirHint() and
-        Cone(orientation == Cone.Orientation.UPWARDS) and
-        Cone(decayPlace == Cone.DecayPlace.TREE)
+        (Cone(orientation == Cone.Orientation.UPWARDS) or
+        Cone(decayPlace == Cone.DecayPlace.TREE))
     then
         resultPlant.setPlantName(PlantName.FIR);
 end
@@ -79,59 +79,59 @@ end
 rule "Suggest Spruce"
     when
         SpruceHint() and
-        Cone(orientation == Cone.Orientation.DOWNWARDS) and
-        Cone(decayPlace == Cone.DecayPlace.GROUND)
+        (Cone(orientation == Cone.Orientation.DOWNWARDS) or
+        Cone(decayPlace == Cone.DecayPlace.GROUND))
     then
         resultPlant.setPlantName(PlantName.SPRUCE);
 end
 
-rule "Suggest Pseudotsuga"
-    when
-        ConePlant() and
-        Needle(lemonScent == true)
-    then
-        resultPlant.setPlantName(PlantName.PSEUDOTSUGA);
-end
-
-rule "Suggest Scots pine"
-    when
-        TwoNeedlePine() and
-        Cone(size == Size.SMALL)
-    then
-        resultPlant.setPlantName(PlantName.SCOTS_PINE);
-end
-
-rule "Suggest black pine"
-    when
-        TwoNeedlePine() and
-        Cone(size == Size.BIG)
-    then
-        resultPlant.setPlantName(PlantName.BLACK_PINE);
-end
-
-rule "Suggest Pinus mugo"
-    when
-        TwoNeedlePine() and
-        PlantShape(shape == Shape.BUSH)
-    then
-        resultPlant.setPlantName(PlantName.PINUS_MUGO);
-end
-
-rule "Suggest Pinus cembra"
-    when
-        FiveNeedlePine() and
-        Cone(seed == Cone.Seed.NUT_SHAPED)
-    then
-        resultPlant.setPlantName(PlantName.PINUS_CEMBRA);
-end
-
-rule "Suggest Pinus strobus"
-    when
-        FiveNeedlePine() and
-        Cone(seed == Cone.Seed.WING_SHAPED)
-    then
-        resultPlant.setPlantName(PlantName.PINUS_STROBUS);
-end
+//rule "Suggest Pseudotsuga"
+//    when
+//        ConePlant() and
+//        Needle(lemonScent == true)
+//    then
+//        resultPlant.setPlantName(PlantName.PSEUDOTSUGA);
+//end
+//
+//rule "Suggest Scots pine"
+//    when
+//        TwoNeedlePine() and
+//        Cone(size == Size.SMALL)
+//    then
+//        resultPlant.setPlantName(PlantName.SCOTS_PINE);
+//end
+//
+//rule "Suggest black pine"
+//    when
+//        TwoNeedlePine() and
+//        Cone(size == Size.BIG)
+//    then
+//        resultPlant.setPlantName(PlantName.BLACK_PINE);
+//end
+//
+//rule "Suggest Pinus mugo"
+//    when
+//        TwoNeedlePine() and
+//        PlantShape(shape == Shape.BUSH)
+//    then
+//        resultPlant.setPlantName(PlantName.PINUS_MUGO);
+//end
+//
+//rule "Suggest Pinus cembra"
+//    when
+//        FiveNeedlePine() and
+//        Cone(seed == Cone.Seed.NUT_SHAPED)
+//    then
+//        resultPlant.setPlantName(PlantName.PINUS_CEMBRA);
+//end
+//
+//rule "Suggest Pinus strobus"
+//    when
+//        FiveNeedlePine() and
+//        Cone(seed == Cone.Seed.WING_SHAPED)
+//    then
+//        resultPlant.setPlantName(PlantName.PINUS_STROBUS);
+//end
 
 rule "Suggest Larch"
     when

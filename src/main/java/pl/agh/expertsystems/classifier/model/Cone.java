@@ -1,11 +1,12 @@
 package pl.agh.expertsystems.classifier.model;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Value;
 
 @Value
 @AllArgsConstructor
+@Builder
 public class Cone implements Fact {
     public enum Orientation {
         UPWARDS,
@@ -19,7 +20,17 @@ public class Cone implements Fact {
 
     public enum Shape {
         ELONGATED,
-        ROUND
+        OVAL
+    }
+
+    public enum Seed {
+        WING_SHAPED,
+        NUT_SHAPED
+    }
+
+    public enum Size {
+        SMALL,
+        BIG
     }
 
     Orientation orientation;
@@ -28,11 +39,7 @@ public class Cone implements Fact {
 
     Shape shape;
 
-    public static Cone oriented(Orientation orientation) { return new Cone(orientation, null, null); }
+    Seed seed;
 
-    public static Cone havingDecayPlace(DecayPlace decayPlace) { return new Cone(null, decayPlace, null); }
-
-    public static Cone havingShape(Shape shape) { return new Cone(null, null, shape); }
-
-    public Cone withShape(Shape shape) { return new Cone(getOrientation(), getDecayPlace(), shape); }
+    Size size;
 }

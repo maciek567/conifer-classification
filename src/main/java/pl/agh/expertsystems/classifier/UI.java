@@ -19,6 +19,7 @@ public class UI {
     }
 
     private void startConsole() {
+        System.out.println(classifier.getStartHint());
         Scanner scanner = new Scanner(System.in);
 
         while (running) {
@@ -40,9 +41,11 @@ public class UI {
         }
     }
 
-    public static void main(String[] args) { UI.run(args); }
+    public static void main(String[] args) {
+        UI.run();
+    }
 
-    private static void run(String[] args) {
+    private static void run() {
         new UI();
     }
 }

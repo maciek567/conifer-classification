@@ -13,14 +13,19 @@ public class Needle implements Fact {
         MORE_THAN_TWENTY
     }
 
+    public enum Scent {
+        LEMON,
+        OTHER
+    }
+
     CountInOneBase countInOneBase;
-    Boolean lemonScent;
+    Scent scent;
 
     public static Needle withCountInOneBase(CountInOneBase countInOneBase) {
         return new Needle(countInOneBase, null);
     }
 
-    public static Needle withScent(Boolean lemonScent) {
-       return new Needle(null, lemonScent);
+    public static Needle withScent(Scent scent) {
+        return new Needle(null, scent);
     }
 }

@@ -28,11 +28,6 @@ public class Cone implements Fact {
         NUT_SHAPED
     }
 
-    public enum Size {
-        SMALL,
-        BIG
-    }
-
     Orientation orientation;
 
     DecayPlace decayPlace;
@@ -40,6 +35,4 @@ public class Cone implements Fact {
     Shape shape;
 
     Seed seed;
-
-    Size size;
 }

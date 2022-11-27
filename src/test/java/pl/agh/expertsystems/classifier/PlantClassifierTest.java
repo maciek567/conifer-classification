@@ -8,6 +8,7 @@ import pl.agh.expertsystems.classifier.model.*;
 import static junit.framework.TestCase.assertEquals;
 import static pl.agh.expertsystems.classifier.model.Cone.*;
 import static pl.agh.expertsystems.classifier.model.Needle.CountInOneBase;
+import static pl.agh.expertsystems.classifier.model.Needle.Scent;
 
 public class PlantClassifierTest {
 
@@ -22,8 +23,9 @@ public class PlantClassifierTest {
     public void whenCriteriaMatching_ThenSuggestScotsPine() {
         Plant result = plantClassifier.classify(
                 ConePlant.create(),
-                new Cone(Orientation.UPWARDS, DecayPlace.GROUND, Shape.OVAL, Seed.WING_SHAPED, Size.SMALL),
-                new Needle(CountInOneBase.ALWAYS_TWO, false)
+                new Cone(Orientation.UPWARDS, DecayPlace.GROUND, Shape.OVAL, Seed.WING_SHAPED),
+                new ConeSize(ConeSize.Size.SMALL),
+                new Needle(CountInOneBase.ALWAYS_TWO, Scent.OTHER)
         );
         assertEquals(PlantName.SCOTS_PINE, result.getPlantName());
     }
@@ -32,7 +34,7 @@ public class PlantClassifierTest {
     public void whenCriteriaMatching_ThenSuggestFir() {
         Plant result = plantClassifier.classify(
                 ConePlant.create(),
-                new Cone(Orientation.UPWARDS, DecayPlace.TREE, Shape.ELONGATED, null, Size.BIG)
+                new Cone(Orientation.UPWARDS, DecayPlace.TREE, Shape.ELONGATED, null)
         );
         assertEquals(PlantName.FIR, result.getPlantName());
     }
@@ -41,7 +43,7 @@ public class PlantClassifierTest {
     public void whenCriteriaMatching_ThenSuggestSpruce() {
         Plant result = plantClassifier.classify(
                 ConePlant.create(),
-                new Cone(Orientation.DOWNWARDS, DecayPlace.GROUND, Shape.ELONGATED, null, Size.BIG)
+                new Cone(Orientation.DOWNWARDS, DecayPlace.GROUND, Shape.ELONGATED, null)
         );
         assertEquals(PlantName.SPRUCE, result.getPlantName());
     }
@@ -50,8 +52,8 @@ public class PlantClassifierTest {
     public void whenCriteriaMatchScotsPine_ThenNotSuggestSpruce() {
         Plant result = plantClassifier.classify(
                 ConePlant.create(),
-                new Cone(Orientation.UPWARDS, DecayPlace.GROUND, Shape.OVAL, null, Size.SMALL),
-                new Needle(CountInOneBase.ALWAYS_TWO, false)
+                new Cone(Orientation.UPWARDS, DecayPlace.GROUND, Shape.OVAL, null),
+                new Needle(CountInOneBase.ALWAYS_TWO, Scent.OTHER)
         );
         assertEquals(PlantName.SPRUCE, result.getPlantName());
     }
@@ -69,7 +71,8 @@ public class PlantClassifierTest {
     public void whenCriteriaMatchFir_ThenNotSuggestScotsPine() {
         Plant result = plantClassifier.classify(
                 ConePlant.create(),
-                new Cone(Orientation.UPWARDS, DecayPlace.TREE, Shape.ELONGATED, null, Size.SMALL)
+                new Cone(Orientation.UPWARDS, DecayPlace.TREE, Shape.ELONGATED, null),
+                new ConeSize(ConeSize.Size.SMALL)
         );
         assertEquals(PlantName.SCOTS_PINE, result.getPlantName());
     }
@@ -82,7 +85,6 @@ public class PlantClassifierTest {
                 Cone.builder()
                         .decayPlace(DecayPlace.GROUND)
                         .shape(Shape.OVAL)
-                        .size(Size.SMALL)
                         .build());
         assertEquals(PlantName.LARCH, result.getPlantName());
     }
@@ -90,7 +92,7 @@ public class PlantClassifierTest {
     @Test
     public void whenCriteriaMatching_ThenSuggestYew() {
         Plant result = plantClassifier.classify(
-                new Needle(CountInOneBase.MORE_THAN_TWENTY, false),
+                new Needle(CountInOneBase.MORE_THAN_TWENTY, Scent.OTHER),
                 Fruit.create(Fruit.Type.BERRY),
                 new Berry(Berry.Color.RED)
         );
@@ -110,7 +112,7 @@ public class PlantClassifierTest {
     public void whenCriteriaMatchingPseudotsuga_ThenSuggestPseudotsuga() {
         Plant result = plantClassifier.classify(
                 ConePlant.create(),
-                Needle.withScent(true)
+                Needle.withScent(Scent.LEMON)
         );
         assertEquals(PlantName.PSEUDOTSUGA, result.getPlantName());
     }
@@ -121,8 +123,8 @@ public class PlantClassifierTest {
                 ConePlant.create(),
                 Cone.builder()
                         .shape(Shape.OVAL)
-                        .size(Size.BIG)
                         .build(),
+                new ConeSize(ConeSize.Size.BIG),
                 Needle.withCountInOneBase(CountInOneBase.ALWAYS_TWO)
         );
         assertEquals(PlantName.BLACK_PINE, result.getPlantName());
@@ -134,7 +136,6 @@ public class PlantClassifierTest {
                 ConePlant.create(),
                 Cone.builder()
                         .shape(Shape.OVAL)
-                        .size(Size.SMALL)
                         .build(),
                 Needle.withCountInOneBase(CountInOneBase.ALWAYS_TWO),
                 new PlantShape(PlantShape.Shape.BUSH)
@@ -149,7 +150,6 @@ public class PlantClassifierTest {
                 Needle.withCountInOneBase(CountInOneBase.ALWAYS_FIVE),
                 Cone.builder()
                         .seed(Seed.NUT_SHAPED)
-                        .size(Size.SMALL)
                         .build()
         );
         assertEquals(PlantName.PINUS_CEMBRA, result.getPlantName());
@@ -162,7 +162,6 @@ public class PlantClassifierTest {
                 Needle.withCountInOneBase(CountInOneBase.ALWAYS_FIVE),
                 Cone.builder()
                         .seed(Seed.WING_SHAPED)
-                        .size(Size.BIG)
                         .build()
         );
         assertEquals(PlantName.PINUS_STROBUS, result.getPlantName());

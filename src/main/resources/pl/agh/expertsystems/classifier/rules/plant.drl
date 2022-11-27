@@ -85,53 +85,53 @@ rule "Suggest Spruce"
         resultPlant.setPlantName(PlantName.SPRUCE);
 end
 
-//rule "Suggest Pseudotsuga"
-//    when
-//        ConePlant() and
-//        Needle(lemonScent == true)
-//    then
-//        resultPlant.setPlantName(PlantName.PSEUDOTSUGA);
-//end
-//
-//rule "Suggest Scots pine"
-//    when
-//        TwoNeedlePine() and
-//        Cone(size == Size.SMALL)
-//    then
-//        resultPlant.setPlantName(PlantName.SCOTS_PINE);
-//end
-//
-//rule "Suggest black pine"
-//    when
-//        TwoNeedlePine() and
-//        Cone(size == Size.BIG)
-//    then
-//        resultPlant.setPlantName(PlantName.BLACK_PINE);
-//end
-//
-//rule "Suggest Pinus mugo"
-//    when
-//        TwoNeedlePine() and
-//        PlantShape(shape == Shape.BUSH)
-//    then
-//        resultPlant.setPlantName(PlantName.PINUS_MUGO);
-//end
-//
-//rule "Suggest Pinus cembra"
-//    when
-//        FiveNeedlePine() and
-//        Cone(seed == Cone.Seed.NUT_SHAPED)
-//    then
-//        resultPlant.setPlantName(PlantName.PINUS_CEMBRA);
-//end
-//
-//rule "Suggest Pinus strobus"
-//    when
-//        FiveNeedlePine() and
-//        Cone(seed == Cone.Seed.WING_SHAPED)
-//    then
-//        resultPlant.setPlantName(PlantName.PINUS_STROBUS);
-//end
+rule "Suggest Pseudotsuga"
+    when
+        ConePlant() and
+        Needle(scent == Needle.Scent.LEMON)
+    then
+        resultPlant.setPlantName(PlantName.PSEUDOTSUGA);
+end
+
+rule "Suggest Scots pine"
+    when
+        TwoNeedlePine() and
+        ConeSize(size == Size.SMALL)
+    then
+        resultPlant.setPlantName(PlantName.SCOTS_PINE);
+end
+
+rule "Suggest black pine"
+    when
+        TwoNeedlePine() and
+        ConeSize(size == Size.BIG)
+    then
+        resultPlant.setPlantName(PlantName.BLACK_PINE);
+end
+
+rule "Suggest Pinus mugo"
+    when
+        TwoNeedlePine() and
+        PlantShape(shape == Shape.BUSH)
+    then
+        resultPlant.setPlantName(PlantName.PINUS_MUGO);
+end
+
+rule "Suggest Pinus cembra"
+    when
+        FiveNeedlePine() and
+        Cone(seed == Cone.Seed.NUT_SHAPED)
+    then
+        resultPlant.setPlantName(PlantName.PINUS_CEMBRA);
+end
+
+rule "Suggest Pinus strobus"
+    when
+        FiveNeedlePine() and
+        Cone(seed == Cone.Seed.WING_SHAPED)
+    then
+        resultPlant.setPlantName(PlantName.PINUS_STROBUS);
+end
 
 rule "Suggest Larch"
     when

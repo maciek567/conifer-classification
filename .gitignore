@@ -62,7 +62,6 @@ xml/src/test/resources/example_dom4j_updated.xml
 xml/src/test/resources/example_jaxb_new.xml
 core-java-io/hard_link.txt
 core-java-io/target_link.txt
-core-java/src/main/java/com/baeldung/manifest/MANIFEST.MF
 ethereum/logs/
 jmeter/src/main/resources/*-JMeter.csv
 ninja/devDb.mv.db
@@ -76,15 +75,12 @@ ninja/devDb.mv.db
 
 
 persistence-modules/hibernate5/transaction.log
-apache-avro/src/main/java/com/baeldung/avro/model/
 jta/transaction-logs/
 software-security/sql-injection-samples/derby.log
-spring-soap/src/main/java/com/baeldung/springsoap/gen/
 /report-*.json
 transaction.log
 *-shell.log
 
-apache-cxf/cxf-aegis/baeldung.xml
 testing-modules/report-*.json
 
 libraries-2/*.db
